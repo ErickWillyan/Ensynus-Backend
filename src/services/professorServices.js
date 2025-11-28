@@ -7,10 +7,12 @@ const insertProfessorService = async (
   pro_dataNasc
 ) => {
   try {
-    const [result] = await sql.query(
-      "INSERT INTO professor (pro_nome, pro_email, pro_senha, pro_dataNasc) VALUES (?, ?, ?, ?)",
-      [pro_nome, pro_email, pro_senha, pro_dataNasc]
-    );
+    const [result] = await sql.query("CALL insert_professor(?, ?, ?, ?)", [
+      pro_nome,
+      pro_email,
+      pro_senha,
+      pro_dataNasc,
+    ]);
     return result;
   } catch (error) {
     return { error: "Erro ao cadastrar professor", message: error.message };

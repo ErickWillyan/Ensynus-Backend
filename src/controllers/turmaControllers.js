@@ -29,6 +29,22 @@ const insertTurmaController = async (req, res) => {
   }
 };
 
+const getTurmaPorProfessorController = async (req, res) => {
+  const { idProfessor } = req.params;
+
+  try {
+    const result = await turmaService.getTurmaPorProfessorService(idProfessor);
+    if (result.error) {
+      return res.status(400).json(result);
+    }
+    res.status(201).json(result);
+  } catch (error) {
+    console.error("Error ao listar turmas:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   insertTurmaController,
+  getTurmaPorProfessorController,
 };
